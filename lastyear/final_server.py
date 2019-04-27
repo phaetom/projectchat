@@ -23,14 +23,14 @@ def broadcast(msg, prefix=""):  # prefix is for name identification. for broadca
         #sock.send(bytes(prefix, "utf8")+msg)
 
 
-def accept_incoming_connections(): # deals with handling of incoming clients."""
+def accept_incoming_connections(): # deals with handling of incoming clients
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
         intro = bytes("Hello! You are all set to start chatting! Please enter you name first:")
         client.send(intro.encode('utf-8'))
         addresses[client] = client_address
-        Thread(target=handle_client, args=(client,)).start()
+        Thread(target=handle_client, args=(client,)).start() #When you create a Thread, you pass it a function and a list containing the arguments to that function
 
 def handle_client(client):  # Takes client socket as argument.
     """Handles a single client connection."""
@@ -55,7 +55,7 @@ def handle_client(client):  # Takes client socket as argument.
 if __name__ == "__main__":
     SERVER.listen(5)  # Listens for 5 connections 
     print("Waiting for the users to connect...") #this is printed when program starts
-    ACCEPT_THREAD = Thread(target=accept_incoming_connections)
+    ACCEPT_THREAD = Thread(target=accept_incoming_connections) #When you create a Thread, you pass it a function and a list containing the arguments to that function
     ACCEPT_THREAD.start()  # Starts the infinite loop.
     ACCEPT_THREAD.join()
     SERVER.close()

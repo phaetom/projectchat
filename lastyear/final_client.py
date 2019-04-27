@@ -1,7 +1,3 @@
-#Write a GUI based chat server program which can allow 5 clients (each client must
-#be handled by threads in server, i.e. incoming traffic by one thread for each client
-#and outgoing traffic another thread. ).
-#
 #• 1.Communication will be conducted over TCP.
 #• 2.The client will initiate a chat session by creating a socket connection to the server.
 #• 3.The server will accept the connection, listen for any messages from the client, and accept them.

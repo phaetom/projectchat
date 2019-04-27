@@ -1,7 +1,3 @@
-#Write a GUI based chat server program which can allow 5 clients (each client must
-#be handled by threads in server, i.e. incoming traffic by one thread for each client
-#and outgoing traffic another thread. ).
-#
 #• 1.Communication will be conducted over TCP.
 #• 2.The client will initiate a chat session by creating a socket connection to the server.
 #• 3.The server will accept the connection, listen for any messages from the client, and accept them.
@@ -9,17 +5,17 @@
 #• 5.The server will send any messages from the client to all the other connected clients except the sending client.
 #• 6.Messages will be encoded in the UTF-8 character set for transmission
 
-from socket import AF_INET, socket, SOCK_STREAM
+from socket import AF_INET, socket, SOCK_STREAM #
 from threading import Thread
 
 clients = {}
 addresses = {}
-HOST = '0.0.0.0'
-PORT = 8000
+HOST = '127.0.0.1' ####SIIA PEAKS TULEMA gethostname et IP oleks updated
+PORT = 8000      #port used by server
 BUFSIZ = 1024
 ADDR = (HOST, PORT)
-SERVER = socket(AF_INET, SOCK_STREAM) 
-SERVER.bind(ADDR)
+SERVER = socket(AF_INET, SOCK_STREAM) #SOCK_STREAM for connection-oriented protocols, AF_INET The family of protocols that is used as the transport mechanism. 
+SERVER.bind(ADDR)       #bind to the port
 
 def broadcast(msg, prefix=""):  # prefix is for name identification. for broadcasting as the name says
     for sock in clients:
@@ -63,8 +59,6 @@ if __name__ == "__main__":
     ACCEPT_THREAD.start()  # Starts the infinite loop.
     ACCEPT_THREAD.join()
     SERVER.close()
-
-
 
 
 

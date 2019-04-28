@@ -1,9 +1,9 @@
-#• 1.Communication will be conducted over TCP.
-#• 2.The client will initiate a chat session by creating a socket connection to the server.
-#• 3.The server will accept the connection, listen for any messages from the client, and accept them.
-#• 4.The client will listen on the connection for any messages from the server, and accept them.
-#• 5.The server will send any messages from the client to all the other connected clients except the sending client.
-#• 6.Messages will be encoded in the UTF-8 character set for transmission
+# 1.Communication will be conducted over TCP.
+# 2.The client will initiate a chat session by creating a socket connection to the server.
+# 3.The server will accept the connection, listen for any messages from the client, and accept them.
+# 4.The client will listen on the connection for any messages from the server, and accept them.
+# 5.The server will send any messages from the client to all the other connected clients except the sending client.
+# 6.Messages will be encoded in the UTF-8 character set for transmission
 
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
@@ -30,12 +30,14 @@ def send(event=None):  # handles sending. event is passed by binders.
 
 def on_closing(event=None): #to close the program
     textbox.set("{quit}")
-    send()
+   # send()
+    client_socket.close()
+    top.quit()
 
 
 
 top = tkinter.Tk() #creates the frame. rename top to something else
-top.title("Pyhton class chat") 
+top.title("Python chat 1.00") 
 
 messages_frame = tkinter.Frame(top)
 textbox = tkinter.StringVar()  # For the messages to be sent.

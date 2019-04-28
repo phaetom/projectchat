@@ -19,15 +19,14 @@ SERVER.bind(ADDR)       #bind to the port
 
 def broadcast(msg, prefix=""):  # prefix is for name identification. for broadcasting as the name says
     for sock in clients:
-        sock.send(bytes(prefix)+msg)
-        #sock.send(bytes(prefix, "utf8")+msg)
+        #sock.send((prefix, "utf-8")+msg)
+        sock.send(bytes(prefix, "utf8")+msg)
 
 
 def accept_incoming_connections(): # deals with handling of incoming clients
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
-
         intro = "Hello! You are all set to start chatting! Please enter you name first:"
         client.send(intro.encode('utf-8'))
         addresses[client] = client_address
@@ -36,20 +35,20 @@ def accept_incoming_connections(): # deals with handling of incoming clients
 def handle_client(client):  # Takes client socket as argument.
     """Handles a single client connection."""
     name = client.recv(BUFSIZ).decode("utf-8")
-    welcome = bytes('Welcome %s! If you ever want to quit, type {quit} to exit.' % name)
+    welcome = 'Welcome %s! If you ever want to quit, type {quit} to exit.' % name
     client.send(welcome.encode("utf-8"))
-    msg = bytes("%s has joined the chat!" % name) #lets others know that user has joined or left
+    msg = "%s has joined the chat!" % name #lets others know that user has joined or left
     broadcast(msg.encode("utf-8"))
     clients[client] = name
     while True:
         msg = client.recv(BUFSIZ)
-        if msg != bytes("{quit}"):
+        if msg != "{quit}":
             broadcast(msg, name+": ")
         else:
-            client.send(bytes("{quit}"))
+            client.send("{quit}")
             client.close()
             del clients[client]
-            broadcast(bytes("%s has left the chat." % name)) #lets others know that user has joined or left
+            broadcast("%s has left the chat." % name) #lets others know that user has joined or left
             break
             
             

@@ -27,6 +27,7 @@ def accept_incoming_connections(): # deals with handling of incoming clients
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
+
         intro = "Hello! You are all set to start chatting! Please enter you name first:"
         client.send(intro.encode('utf-8'))
         addresses[client] = client_address

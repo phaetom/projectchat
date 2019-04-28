@@ -27,7 +27,7 @@ def accept_incoming_connections(): # deals with handling of incoming clients
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
-        intro = bytes("Hello! You are all set to start chatting! Please enter you name first:")
+        intro = "Hello! You are all set to start chatting! Please enter you name first:"
         client.send(intro.encode('utf-8'))
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,)).start() #When you create a Thread, you pass it a function and a list containing the arguments to that function

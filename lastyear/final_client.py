@@ -23,13 +23,13 @@ def send(event=None):  # handles sending. event is passed by binders.
     msg = textbox.get()
     textbox.set("")  # Clears input field.
     client_socket.send(bytes(msg, "utf8"))
-    if msg == "{quit}":
+    if msg == "quit":
         client_socket.close()
         top.quit()
 
 
 def on_closing(event=None): #to close the program
-    textbox.set("{quit}")
+    textbox.set("quit")
     send()
 
 

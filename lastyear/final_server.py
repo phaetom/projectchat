@@ -10,7 +10,7 @@ from threading import Thread
 
 clients = {}
 addresses = {}
-HOST = '127.0.0.1' ####SIIA PEAKS TULEMA gethostname et IP oleks updated
+HOST = '172.31.30.124' ####SIIA PEAKS TULEMA gethostname et IP oleks updated
 PORT = 8000      #port used by server
 BUFSIZ = 1024
 ADDR = (HOST, PORT)
@@ -35,17 +35,17 @@ def accept_incoming_connections(): # deals with handling of incoming clients
 def handle_client(client):  # Takes client socket as argument.
     """Handles a single client connection."""
     name = client.recv(BUFSIZ).decode("utf-8")
-    welcome = 'Welcome %s! If you ever want to quit, type {quit} to exit.' % name
+    welcome = 'Welcome %s! If you ever want to quit, type "quit()" to exit.' % name
     client.send(welcome.encode("utf-8"))
     msg = "%s has joined the chat!" % name #lets others know that user has joined or left
     broadcast(msg.encode("utf-8"))
     clients[client] = name
     while True:
         msg = client.recv(BUFSIZ)
-        if msg != "{quit}":
+        if msg != "quit()":
             broadcast(msg, name+": ")
         else:
-            client.send("{quit}")
+            client.send("quit()")
             client.close()
             del clients[client]
             broadcast("%s has left the chat." % name) #lets others know that user has joined or left

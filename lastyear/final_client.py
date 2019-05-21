@@ -35,7 +35,7 @@ def on_closing(event=None): #to close the program
 
 
 top = tkinter.Tk() #creates the frame. rename top to something else
-top.title("Pyhton class chat") 
+top.title("Our secret chat") 
 
 messages_frame = tkinter.Frame(top)
 textbox = tkinter.StringVar()  # For the messages to be sent.
@@ -57,7 +57,7 @@ send_button.config(background="yellow") #using pack instead of grid to place ite
 top.protocol("WM_DELETE_WINDOW", on_closing) #invokes the function for closing
 
 
-HOST = '127.0.0.1'
+HOST = '3.17.188.250'
 PORT = 8000
 
 #In case we need to ask for host input and port
